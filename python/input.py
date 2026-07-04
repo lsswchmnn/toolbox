@@ -1,5 +1,5 @@
-from python.errors import show_error
-from python.display import print_thin_separation
+from python.errors   import show_error
+from python.display  import print_thin_separation
 #=========================================================================
 
 def input_int(min_value: int=0, max_value: int=10000, default: int=100, 
@@ -139,11 +139,14 @@ def input_str(msg: str="value") -> str:
         return None    
     return value
 
-def input_confirm(msg: str="Are you sure?", default_true: bool=True) -> bool:
+def input_confirm(msg: str="Are you sure?", default_true: bool=True, warn_symbol: bool=False) -> bool:
     print()
     print_thin_separation(linebreak=False)
     print()
-    choice = input(f"{msg} (y/n): ").strip().lower()
+    if not warn_symbol:
+        choice = input(f"{msg} (y/n): ").strip().lower()
+    else:
+        choice = input(f"⚠️ {msg} (y/n): ").strip().lower()
 
     if not default_true:
         if choice == '':
